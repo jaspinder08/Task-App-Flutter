@@ -4,10 +4,12 @@ import 'package:task_app_flutter/utility/color_constants.dart';
 class InputField extends StatelessWidget {
   const InputField({
     super.key,
+    this.obsecureText = false,
     this.label = '',
   });
 
   final String label;
+  final bool obsecureText;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,6 +18,7 @@ class InputField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: label,
           labelStyle: const TextStyle(
+            fontSize: 15,
             color: Colors.black45,
           ),
           contentPadding: const EdgeInsets.symmetric(
@@ -37,6 +40,7 @@ class InputField extends StatelessWidget {
             ),
           ),
         ),
+        obscureText: true,
       ),
     );
   }

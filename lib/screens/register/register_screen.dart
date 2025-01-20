@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_app_flutter/components/input_field.dart';
-import 'package:task_app_flutter/submit_button.dart';
+import 'package:task_app_flutter/components/submit_button.dart';
+import 'package:task_app_flutter/utility/color_constants.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -14,8 +15,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Appcolors.white,
+        leading: const Icon(
+          Icons.arrow_back,
+          color: Appcolors.primaryColor,
+        ),
+      ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 150, left: 20, right: 20),
+        padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -51,12 +59,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             const InputField(
               label: 'Email',
+              obsecureText: false,
             ),
             const InputField(
               label: 'Password',
+              obsecureText: true,
             ),
             const InputField(
               label: 'Confirm Password',
+              obsecureText: true,
             ),
             const SubmitButton()
           ],

@@ -12,7 +12,7 @@ class SubmitButton extends StatelessWidget {
         width: MediaQuery.sizeOf(context).width,
         child: MaterialButton(
           color: Appcolors.primaryColor,
-          padding: const EdgeInsets.symmetric(vertical: 20),
+          padding: const EdgeInsets.symmetric(vertical: 25),
           onPressed: () {},
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
@@ -24,6 +24,7 @@ class SubmitButton extends StatelessWidget {
           child: const Text(
             'Submit',
             style: TextStyle(
+              fontSize: 15,
               color: Appcolors.white,
             ),
           ),
