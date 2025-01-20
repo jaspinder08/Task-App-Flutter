@@ -5,11 +5,15 @@ class InputField extends StatelessWidget {
   const InputField({
     super.key,
     this.obsecureText = false,
+    this.email = false,
     this.label = '',
+    this.inputType = TextInputType.text,
   });
 
   final String label;
+  final bool email;
   final bool obsecureText;
+  final TextInputType inputType;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,7 +44,8 @@ class InputField extends StatelessWidget {
             ),
           ),
         ),
-        obscureText: true,
+        obscureText: obsecureText,
+        keyboardType: TextInputType.emailAddress,
       ),
     );
   }

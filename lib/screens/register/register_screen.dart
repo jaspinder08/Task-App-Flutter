@@ -14,6 +14,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Appcolors.white,
@@ -23,7 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
+        padding: const EdgeInsets.only(top: 0, left: 20, right: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -59,15 +60,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             const InputField(
               label: 'Email',
+              email: true,
               obsecureText: false,
+              inputType: TextInputType.emailAddress,
             ),
             const InputField(
               label: 'Password',
               obsecureText: true,
+              inputType: TextInputType.visiblePassword,
             ),
             const InputField(
               label: 'Confirm Password',
               obsecureText: true,
+              inputType: TextInputType.visiblePassword,
             ),
             const SubmitButton()
           ],
