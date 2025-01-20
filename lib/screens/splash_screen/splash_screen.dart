@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:task_app_flutter/register_screen.dart';
+import 'package:task_app_flutter/screens/register/register_screen.dart';
 import 'package:task_app_flutter/utility/color_constants.dart';
 
 class SplashScreen extends StatefulWidget {

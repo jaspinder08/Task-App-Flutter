@@ -24,6 +24,7 @@ class SubmitButton extends StatelessWidget {
           child: const Text(
             'Submit',
             style: TextStyle(
+              fontSize: 15,
               color: Appcolors.white,
             ),
           ),
