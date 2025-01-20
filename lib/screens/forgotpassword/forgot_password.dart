@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:task_app_flutter/components/input_field.dart';
 import 'package:task_app_flutter/components/submit_button.dart';
+import 'package:task_app_flutter/screens/login/login_screen.dart';
 import 'package:task_app_flutter/utility/color_constants.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Navigator.pop(
               context,
               MaterialPageRoute(
-                builder: (context) => const RegisterScreen(),
+                builder: (context) => const LoginScreen(),
               ),
             );
           },
@@ -34,28 +35,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 0, left: 20, right: 20),
+        padding: const EdgeInsets.only(
+          top: 0,
+          left: 20,
+          right: 20,
+          bottom: 0,
+        ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               children: [
-                Image.asset(
-                  "assets/images/logo.png",
-                  height: 150,
-                  width: 150,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/images/logo.png",
+                      height: 150,
+                      width: 150,
+                    ),
+                  ],
                 ),
               ],
             ),
             const SizedBox(
-              height: 40,
+              height: 100,
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  'Create your Account',
+                  'Write your email here',
                   style: TextStyle(
                     fontFamily: 'OpenSans', // Specify the font family
                     fontSize: 18,
@@ -74,17 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               obsecureText: false,
               inputType: TextInputType.emailAddress,
             ),
-            const InputField(
-              label: 'Password',
-              obsecureText: true,
-              inputType: TextInputType.visiblePassword,
-            ),
-            const InputField(
-              label: 'Confirm Password',
-              obsecureText: true,
-              inputType: TextInputType.visiblePassword,
-            ),
-            const SubmitButton()
+            const SubmitButton(),
           ],
         ),
       ),
