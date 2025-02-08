@@ -2,50 +2,56 @@ import 'package:flutter/material.dart';
 import 'package:task_app_flutter/utility/color_constants.dart';
 
 class InputField extends StatelessWidget {
-  const InputField({
+  InputField({
     super.key,
     this.obsecureText = false,
     this.email = false,
-    this.label = '',
+    this.hint = '',
     this.inputType = TextInputType.text,
+    required this.icon,
+    this.isPassword = false,
+    this.suffixIcon = false,
   });
 
-  final String label;
+  final String hint;
   final bool email;
   final bool obsecureText;
   final TextInputType inputType;
+  final IconData icon;
+  final bool isPassword;
+  final bool suffixIcon;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: TextFormField(
         decoration: InputDecoration(
-          labelText: label,
-          labelStyle: const TextStyle(
+          hintText: hint, // Changed from labelText to hintText
+          prefixIcon: Icon(icon, color: Colors.white),
+          suffixIcon: suffixIcon
+              ? const Icon(
+                  Icons.arrow_circle_right,
+                  color: Appcolors.white,
+                )
+              : null,
+          filled: true,
+          fillColor: Colors.white.withOpacity(0.2),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide.none,
+          ),
+          hintStyle: TextStyle(
             fontSize: 15,
-            color: Colors.black45,
+            color: Colors.white.withOpacity(0.7),
           ),
           contentPadding: const EdgeInsets.symmetric(
             vertical: 20,
             horizontal: 20,
           ),
-          focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
-            borderSide: BorderSide(
-              color: Appcolors.primaryColor,
-            ),
-          ),
-          enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            borderSide: BorderSide(
-              color: Colors.black12,
-            ),
-          ),
         ),
-        obscureText: obsecureText,
-        keyboardType: TextInputType.emailAddress,
+        obscureText: isPassword,
+        keyboardType: inputType,
       ),
     );
   }

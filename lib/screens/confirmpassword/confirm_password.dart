@@ -6,14 +6,14 @@ import 'package:task_app_flutter/components/submit_button.dart';
 import 'package:task_app_flutter/screens/home/home.dart';
 import 'package:task_app_flutter/utility/color_constants.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class ConfirmPassword extends StatefulWidget {
+  const ConfirmPassword({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<ConfirmPassword> createState() => _ConfirmPasswordState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _ConfirmPasswordState extends State<ConfirmPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,10 +65,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const SizedBox(
-                              height: 50,
+                              height: 100,
                             ),
                             const Text(
-                              "Sign up for Free",
+                              "Confirm Password",
                               style: TextStyle(
                                 fontSize: 35,
                                 // fontWeight: FontWeight.bold,
@@ -77,17 +77,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             const SizedBox(height: 5),
                             const Text(
-                              "Quickly make your account",
+                              "Make new password",
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white70,
                               ),
                               textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 20),
-                            InputField(
-                              icon: Icons.mail_outline,
-                              hint: 'Enter Email',
                             ),
                             const SizedBox(height: 15),
                             InputField(
@@ -103,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             const SizedBox(height: 10),
                             SubmitButton(
-                              text: 'Sign up',
+                              text: 'Change Password',
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
@@ -111,26 +106,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                 );
                               },
-                            ),
-                            const SizedBox(height: 20),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text.rich(
-                                TextSpan(
-                                  text: "Already a member? ",
-                                  style: TextStyle(color: Colors.white70),
-                                  children: [
-                                    TextSpan(
-                                      text: "Login now",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ),
                           ],
                         ),

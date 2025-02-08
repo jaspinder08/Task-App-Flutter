@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:task_app_flutter/utility/color_constants.dart';
 
 class SubmitButton extends StatelessWidget {
-  const SubmitButton({super.key});
+  const SubmitButton({
+    super.key,
+    this.text = '',
+    required this.onTap,
+  });
+
+  final String text;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -10,20 +17,18 @@ class SubmitButton extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20.0),
       child: SizedBox(
         width: MediaQuery.sizeOf(context).width,
-        child: MaterialButton(
-          color: Appcolors.primaryColor,
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          onPressed: () {},
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(
-                10,
-              ),
+        child: ElevatedButton(
+          onPressed: onTap, // Correctly handles onTap
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Appcolors.primaryColor, // Button color
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
           ),
-          child: const Text(
-            'Submit',
-            style: TextStyle(
+          child: Text(
+            text,
+            style: const TextStyle(
               fontSize: 15,
               color: Appcolors.white,
             ),

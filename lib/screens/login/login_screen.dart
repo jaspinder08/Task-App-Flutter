@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:task_app_flutter/components/input_field.dart';
 import 'package:task_app_flutter/components/submit_button.dart';
 import 'package:task_app_flutter/screens/forgotpassword/forgot_password.dart';
+import 'package:task_app_flutter/screens/home/home.dart';
 import 'package:task_app_flutter/screens/register/register_screen.dart';
 import 'package:task_app_flutter/utility/color_constants.dart';
 
@@ -16,128 +19,126 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.only(
-          top: 80,
-          left: 20,
-          right: 20,
-          bottom: 20,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/logo.png",
-                      height: 150,
-                      width: 150,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Login into your Account',
-                      style: TextStyle(
-                        fontFamily: 'OpenSans', // Specify the font family
-                        fontSize: 18,
-                        // color: Appcolors.black,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const InputField(
-                  label: 'Email',
-                  email: true,
-                  obsecureText: false,
-                  inputType: TextInputType.emailAddress,
-                ),
-                const InputField(
-                  label: 'Password',
-                  obsecureText: true,
-                  inputType: TextInputType.visiblePassword,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ForgotPassword(),
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Appcolors.primaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SubmitButton()
-              ],
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RegisterScreen(),
-                  ),
-                );
-              },
-              child: Column(
-                children: [
-                  RichText(
-                    text: const TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Dont have a account?',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Appcolors.black,
-                          ),
-                        ),
-                        TextSpan(
-                          text: ' Signup',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Appcolors.primaryColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Appcolors.primaryColor,
+                  Appcolors.black,
                 ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          Center(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  width: 400,
+                  height: 600,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+                      color: Colors.white.withOpacity(0.3),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Hello Again!",
+                        style: TextStyle(
+                          fontSize: 35,
+                          // fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      const Text(
+                        "Welcome back, you've been missed!",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white70,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 20),
+                      InputField(
+                        icon: Icons.person_2_outlined,
+                        hint: 'Email or Username',
+                      ),
+                      const SizedBox(height: 15),
+                      InputField(
+                        icon: Icons.lock_open_outlined,
+                        isPassword: true,
+                        hint: 'Password',
+                      ),
+                      const SizedBox(height: 10),
+                      // Recovery Password
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const ForgotPassword(),
+                            ),
+                          );
+                        },
+                        child: const Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "Recovery Password?",
+                            style: TextStyle(color: Colors.white70),
+                          ),
+                        ),
+                      ),
+                      SubmitButton(
+                        text: 'Login',
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const HomeScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const RegisterScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text.rich(
+                          TextSpan(
+                            text: "Not a member? ",
+                            style: TextStyle(color: Colors.white70),
+                            children: [
+                              TextSpan(
+                                text: "Register now",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
