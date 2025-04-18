@@ -33,111 +33,144 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          Center(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  width: 400,
-                  height: 600,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(
-                      color: Colors.white.withOpacity(0.3),
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 120,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Appcolors.white.withOpacity(0.1),
+                          )),
+                      child: ClipOval(
+                        child: Image.asset(
+                          'assets/images/logo_white.png',
+                        ),
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Hello Again!",
-                        style: TextStyle(
-                          fontSize: 35,
-                          // fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      const Text(
-                        "Welcome back, you've been missed!",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white70,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 20),
-                      InputField(
-                        icon: Icons.person_2_outlined,
-                        hint: 'Email or Username',
-                      ),
-                      const SizedBox(height: 15),
-                      InputField(
-                        icon: Icons.lock_open_outlined,
-                        isPassword: true,
-                        hint: 'Password',
-                      ),
-                      const SizedBox(height: 10),
-                      // Recovery Password
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const ForgotPassword(),
-                            ),
-                          );
-                        },
-                        child: const Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            "Recovery Password?",
-                            style: TextStyle(color: Colors.white70),
+                    const SizedBox(height: 20),
+                    // Glass container
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          "Hello Again!",
+                          style: TextStyle(
+                            fontSize: 35,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            letterSpacing: 1.5,
                           ),
                         ),
-                      ),
-                      SubmitButton(
-                        text: 'Login',
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const HomeScreen(),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const RegisterScreen(),
-                            ),
-                          );
-                        },
-                        child: const Text.rich(
-                          TextSpan(
-                            text: "Not a member? ",
-                            style: TextStyle(color: Colors.white70),
-                            children: [
-                              TextSpan(
-                                text: "Register now",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                        const SizedBox(height: 5),
+                        const Text(
+                          "Welcome back, you've been missed!",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            color: Colors.white,
+                            letterSpacing: 0.5,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 20),
+                        InputField(
+                          icon: Icons.person_2_outlined,
+                          hint: 'Email or Username',
+                          suffixIcon: true,
+                          suffixImagePath: 'assets/icons/google.png',
+                        ),
+                        InputField(
+                          icon: Icons.lock_open_outlined,
+                          isPassword: true,
+                          hint: 'Password',
+                        ),
+                        const SizedBox(height: 15),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const ForgotPassword(),
                               ),
-                            ],
+                            );
+                          },
+                          child: const Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              "Recovery Password?",
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                        const SizedBox(height: 25),
+                        SubmitButton(
+                          text: 'Login',
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const HomeScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const RegisterScreen(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.white.withOpacity(0.2),
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: const Text.rich(
+                              TextSpan(
+                                text: "Not a member? ",
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 14,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "Register now",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
