@@ -4,6 +4,9 @@ import 'package:task_app_flutter/components/input_field.dart';
 import 'package:task_app_flutter/screens/RegisterEmail.dart/register_with_email.dart';
 import 'package:task_app_flutter/utility/color_constants.dart';
 import 'package:task_app_flutter/utility/custom_fonts.dart';
+import 'package:task_app_flutter/services/auth_service.dart';
+import 'package:task_app_flutter/screens/home/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignInMainScreen extends StatefulWidget {
   const SignInMainScreen({super.key});
@@ -13,6 +16,74 @@ class SignInMainScreen extends StatefulWidget {
 }
 
 class _SignInMainScreenState extends State<SignInMainScreen> {
+  final AuthService _authService = AuthService();
+  bool _isLoading = false;
+  String _testMessage = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _checkFirebaseStatus();
+  }
+
+  Future<void> _checkFirebaseStatus() async {
+    try {
+      // Check if Firebase Auth is initialized
+      final auth = FirebaseAuth.instance;
+      setState(() {
+        _testMessage = 'Firebase Auth is initialized';
+      });
+      print('Firebase Auth Status: ${auth.app.name}');
+    } catch (e) {
+      setState(() {
+        _testMessage = 'Firebase Auth Error: $e';
+      });
+      print('Firebase Auth Error: $e');
+    }
+  }
+
+  Future<void> _handleGoogleSignIn() async {
+    setState(() {
+      _isLoading = true;
+      _testMessage = 'Attempting Google Sign In...';
+    });
+
+    try {
+      final userCredential = await _authService.signInWithGoogle();
+      if (userCredential != null && mounted) {
+        setState(() {
+          _testMessage = 'Successfully signed in with Google';
+        });
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
+          ),
+        );
+      } else {
+        setState(() {
+          _testMessage = 'Google Sign In was cancelled or failed';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _testMessage = 'Error during Google Sign In: $e';
+      });
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to sign in with Google: $e'),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +94,7 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
               gradient: LinearGradient(
                 colors: [
                   Appcolors.primaryColor,
-                  Appcolors.white,
+                  Appcolors.black,
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -35,7 +106,7 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height - 40, // Subtract SafeArea padding
+                  height: MediaQuery.of(context).size.height - 40,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -58,9 +129,7 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 15,
-                            ),
+                            const SizedBox(height: 15),
                             Text(
                               "Hello Again!",
                               style: CustomFonts.heading(
@@ -73,15 +142,26 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                               style: CustomFonts.subheading(
                                 color: Appcolors.white,
                               ),
-
-                              // textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 20),
+                            // Test message display
+                            if (_testMessage.isNotEmpty)
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: Text(
+                                  _testMessage,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
                             InputField(
                               hint: 'Sign in with Google',
                               suffixIcon: true,
                               suffixImagePath: 'assets/icons/google.png',
-                              onTap: () {},
+                              onTap: _isLoading ? null : _handleGoogleSignIn,
                               readOnly: true,
                             ),
                             InputField(
@@ -111,7 +191,8 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => const RegisterWithEmail(),
+                                    builder: (context) =>
+                                        const RegisterWithEmail(),
                                   ),
                                 );
                               },
@@ -152,13 +233,13 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                                   ),
                                   children: [
                                     const TextSpan(
-                                      text: 'Before signing in, you can read the ',
+                                      text:
+                                          'Before signing in, you can read the ',
                                     ),
                                     TextSpan(
                                       text: 'Terms and Conditions',
                                       style: const TextStyle(
                                         decoration: TextDecoration.underline,
-                                        // fontWeight: FontWeight.bold,
                                       ),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
@@ -172,7 +253,6 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                                       text: 'Privacy Policy',
                                       style: const TextStyle(
                                         decoration: TextDecoration.underline,
-                                        // fontWeight: FontWeight.bold,
                                       ),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
@@ -192,6 +272,15 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
               ),
             ),
           ),
+          if (_isLoading)
+            Container(
+              color: Colors.black54,
+              child: const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
+            ),
         ],
       ),
     );
