@@ -21,7 +21,7 @@ class SubmitButton extends StatelessWidget {
           onPressed: onTap, // Correctly handles onTap
           style: ElevatedButton.styleFrom(
             backgroundColor: Appcolors.primaryColor, // Button color
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.symmetric(vertical: 15),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(100)),
             ),

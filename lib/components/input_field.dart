@@ -8,30 +8,33 @@ class InputField extends StatelessWidget {
     this.email = false,
     this.hint = '',
     this.inputType = TextInputType.text,
-    required this.icon,
     this.isPassword = false,
     this.suffixIcon = false,
     this.suffixImagePath,
+    this.readOnly = false,
+    this.onTap,
   });
 
   final String hint;
   final bool email;
   final bool obsecureText;
   final TextInputType inputType;
-  final IconData icon;
   final bool isPassword;
   final bool suffixIcon;
   final String? suffixImagePath; // made it strongly typed
+  final bool readOnly;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: TextFormField(
+        onTap: onTap,
+        readOnly: readOnly,
         decoration: InputDecoration(
           hintText: hint,
-          prefixIcon: Icon(icon, color: Colors.white),
-          suffixIcon: suffixIcon
+          prefixIcon: suffixIcon
               ? (suffixImagePath != null
                   ? SizedBox(
                       width: 24,
@@ -52,25 +55,22 @@ class InputField extends StatelessWidget {
               : null,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(100),
-            borderSide:
-                BorderSide(color: Colors.white.withOpacity(0.2), width: 1),
+            borderSide: BorderSide(color: Colors.white.withOpacity(0.2), width: 1),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(100),
-            borderSide:
-                BorderSide(color: Colors.white.withOpacity(0.2), width: 1),
+            borderSide: BorderSide(color: Colors.white.withOpacity(0.2), width: 1),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(100),
-            borderSide:
-                BorderSide(color: Colors.white.withOpacity(0.2), width: 1),
+            borderSide: BorderSide(color: Colors.white.withOpacity(0.2), width: 1),
           ),
           hintStyle: TextStyle(
             fontSize: 15,
             color: Colors.white.withOpacity(0.7),
           ),
           contentPadding: const EdgeInsets.symmetric(
-            vertical: 20,
+            vertical: 10,
             horizontal: 20,
           ),
         ),

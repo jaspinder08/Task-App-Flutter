@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_app_flutter/screens/login/login_screen.dart';
+import 'package:task_app_flutter/screens/SignInMain/signin_main_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: const SignInMainScreen(),
     );
   }
 }

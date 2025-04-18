@@ -86,13 +86,13 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
                             ),
                             const SizedBox(height: 15),
                             InputField(
-                              icon: Icons.lock_open_outlined,
+                              // icon: Icons.lock_open_outlined,
                               isPassword: true,
                               hint: 'Password',
                             ),
                             const SizedBox(height: 15),
                             InputField(
-                              icon: Icons.lock_open_outlined,
+                              // icon: Icons.lock_open_outlined,
                               isPassword: true,
                               hint: 'Confirm Password',
                             ),

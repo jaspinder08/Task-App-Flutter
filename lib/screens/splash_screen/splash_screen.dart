@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:task_app_flutter/screens/register/register_screen.dart';
+import 'package:task_app_flutter/screens/signInMain/Signin_main_screen.dart';
 import 'package:task_app_flutter/utility/color_constants.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const RegisterScreen(),
+          builder: (context) => const SignInMainScreen(),
         ),
       );
     });

@@ -87,7 +87,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           ),
                           const SizedBox(height: 20),
                           InputField(
-                            icon: Icons.person_2_outlined,
+                            // icon: Icons.person_2_outlined,
                             hint: 'Enter Email',
                             suffixIcon: true,
                           ),
