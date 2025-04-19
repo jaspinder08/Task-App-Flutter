@@ -13,6 +13,8 @@ class InputField extends StatelessWidget {
     this.suffixImagePath,
     this.readOnly = false,
     this.onTap,
+    this.textColor,
+    this.hintColor,
   });
 
   final String hint;
@@ -24,59 +26,70 @@ class InputField extends StatelessWidget {
   final String? suffixImagePath; // made it strongly typed
   final bool readOnly;
   final void Function()? onTap;
+  final Color? textColor;
+  final Color? hintColor;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20),
-      child: TextFormField(
-        onTap: onTap,
-        readOnly: readOnly,
-        decoration: InputDecoration(
-          hintText: hint,
-          prefixIcon: suffixIcon
-              ? (suffixImagePath != null
-                  ? SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: Center(
-                        child: Image.asset(
-                          suffixImagePath!,
-                          width: 20,
-                          height: 20,
-                          fit: BoxFit.contain,
-                        ),
+    return TextFormField(
+      onTap: onTap,
+      readOnly: readOnly,
+      style: TextStyle(
+        color: textColor ?? Appcolors.white,
+      ),
+      decoration: InputDecoration(
+        hintText: hint,
+        prefixIcon: suffixIcon
+            ? (suffixImagePath != null
+                ? SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: Center(
+                      child: Image.asset(
+                        suffixImagePath!,
+                        width: 20,
+                        height: 20,
+                        fit: BoxFit.contain,
                       ),
-                    )
-                  : const Icon(
-                      Icons.arrow_circle_right,
-                      color: Appcolors.white,
-                    ))
-              : null,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(100),
-            borderSide: BorderSide(color: Colors.white.withOpacity(0.2), width: 1),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(100),
-            borderSide: BorderSide(color: Colors.white.withOpacity(0.2), width: 1),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(100),
-            borderSide: BorderSide(color: Colors.white.withOpacity(0.2), width: 1),
-          ),
-          hintStyle: TextStyle(
-            fontSize: 15,
-            color: Colors.white.withOpacity(0.7),
-          ),
-          contentPadding: const EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 20,
+                    ),
+                  )
+                : Icon(
+                    Icons.arrow_circle_right,
+                    color: textColor ?? Appcolors.white,
+                  ))
+            : null,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100),
+          borderSide: BorderSide(
+            color: Appcolors.primaryColor.withOpacity(0.1),
+            width: 1,
           ),
         ),
-        obscureText: isPassword,
-        keyboardType: inputType,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100),
+          borderSide: BorderSide(
+            color: Appcolors.primaryColor.withOpacity(0.1),
+            width: 1,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(100),
+          borderSide: BorderSide(
+            color: Appcolors.primaryColor.withOpacity(0.1),
+            width: 1,
+          ),
+        ),
+        hintStyle: TextStyle(
+          fontSize: 15,
+          color: hintColor,
+        ),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 20,
+        ),
       ),
+      obscureText: isPassword,
+      keyboardType: inputType,
     );
   }
 }

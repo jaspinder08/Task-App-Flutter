@@ -8,14 +8,14 @@ class CustomFonts {
   static const double medium = 14.0;
   static const double large = 16.0;
   static const double xlarge = 18.0;
-  static const double xxlarge = 28.0;
+  static const double xxlarge = 30.0;
 
   // Text styles with dynamic colors
   static TextStyle heading({Color? color}) => TextStyle(
         fontSize: xxlarge,
         fontWeight: FontWeight.bold,
         fontFamily: 'Raleway',
-        letterSpacing: 0.5,
+        letterSpacing: 3,
         color: color ?? Appcolors.white,
       );
 

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:task_app_flutter/components/input_field.dart';
@@ -18,6 +20,7 @@ class SignInMainScreen extends StatefulWidget {
 class _SignInMainScreenState extends State<SignInMainScreen> {
   final AuthService _authService = AuthService();
   bool _isLoading = false;
+  // ignore: unused_field
   String _testMessage = '';
 
   @override
@@ -87,23 +90,12 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Appcolors.primaryColor,
-                  Appcolors.black,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-          ),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: SingleChildScrollView(
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height - 40,
@@ -111,7 +103,7 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 80.0),
+                        padding: const EdgeInsets.only(top: 100.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -121,57 +113,65 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    color: Appcolors.white.withOpacity(0.1),
+                                    color: Appcolors.primaryColor.withOpacity(0.1),
                                   )),
                               child: ClipOval(
                                 child: Image.asset(
-                                  'assets/images/logo_white.png',
+                                  'assets/images/logo_blue.png',
                                 ),
                               ),
                             ),
                             const SizedBox(height: 15),
                             Text(
-                              "Hello Again!",
+                              "Welcome Back!",
                               style: CustomFonts.heading(
-                                color: Appcolors.white,
+                                color: Appcolors.primaryColor,
                               ),
                             ),
                             const SizedBox(height: 5),
                             Text(
                               "Welcome back, you've been missed!",
                               style: CustomFonts.subheading(
-                                color: Appcolors.white,
+                                color: Appcolors.black.withOpacity(0.7),
                               ),
                             ),
-                            const SizedBox(height: 20),
-                            // Test message display
-                            if (_testMessage.isNotEmpty)
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 10),
-                                child: Text(
-                                  _testMessage,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
+                            const SizedBox(height: 50),
                             InputField(
                               hint: 'Sign in with Google',
                               suffixIcon: true,
                               suffixImagePath: 'assets/icons/google.png',
                               onTap: _isLoading ? null : _handleGoogleSignIn,
                               readOnly: true,
+                              textColor: Appcolors.white,
+                              hintColor: Appcolors.black.withOpacity(0.4),
                             ),
-                            InputField(
-                              suffixIcon: true,
-                              suffixImagePath: 'assets/icons/facebook.png',
-                              isPassword: true,
-                              hint: 'Sign in with Facebook',
-                              onTap: () {},
-                              readOnly: true,
+                            const SizedBox(height: 20),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Divider(
+                                    color: Appcolors.black.withOpacity(0.1),
+                                    thickness: 1,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  child: Text(
+                                    "OR",
+                                    style: CustomFonts.subheading(
+                                      color: Appcolors.black.withOpacity(0.5),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Divider(
+                                    color: Appcolors.black.withOpacity(0.1),
+                                    thickness: 1,
+                                  ),
+                                ),
+                              ],
                             ),
+                            const SizedBox(height: 20),
                             InputField(
                               suffixIcon: true,
                               suffixImagePath: 'assets/icons/mail.png',
@@ -185,29 +185,30 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                                 );
                               },
                               readOnly: true,
+                              textColor: Appcolors.white,
+                              hintColor: Appcolors.black.withOpacity(0.4),
                             ),
                             const SizedBox(height: 15),
                             GestureDetector(
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegisterWithEmail(),
+                                    builder: (context) => const RegisterWithEmail(),
                                   ),
                                 );
                               },
-                              child: const Text.rich(
+                              child: Text.rich(
                                 TextSpan(
                                   text: "Already have account? ",
                                   style: TextStyle(
-                                    color: Colors.white70,
+                                    color: Appcolors.black.withOpacity(0.7),
                                     fontSize: 14,
                                   ),
                                   children: [
                                     TextSpan(
                                       text: "Sign in",
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: Appcolors.primaryColor,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -228,18 +229,18 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                                 textAlign: TextAlign.center,
                                 text: TextSpan(
                                   style: TextStyle(
-                                    color: Appcolors.white,
+                                    color: Appcolors.black.withOpacity(0.5),
                                     fontSize: 12,
                                   ),
                                   children: [
                                     const TextSpan(
-                                      text:
-                                          'Before signing in, you can read the ',
+                                      text: 'Before signing in, you can read the ',
                                     ),
                                     TextSpan(
                                       text: 'Terms and Conditions',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         decoration: TextDecoration.underline,
+                                        color: Appcolors.primaryColor,
                                       ),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
@@ -251,8 +252,9 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                                     ),
                                     TextSpan(
                                       text: 'Privacy Policy',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         decoration: TextDecoration.underline,
+                                        color: Appcolors.primaryColor,
                                       ),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
