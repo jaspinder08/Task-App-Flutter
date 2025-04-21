@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:task_app_flutter/components/input_field.dart';
 import 'package:task_app_flutter/components/submit_button.dart';
-import 'package:task_app_flutter/screens/confirmpassword/confirm_password.dart';
+import 'package:task_app_flutter/screens/home/home.dart';
 import 'package:task_app_flutter/utility/color_constants.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -96,9 +96,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             text: 'Verify Otp',
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ConfirmPassword()));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeScreen(),
+                                ),
+                              );
                             },
                             // onTap: (){
 

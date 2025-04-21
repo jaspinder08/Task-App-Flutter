@@ -1,0 +1,25 @@
+{
+  "taskStatuses": [
+    {
+      "id": "todo",
+      "name": "To-do",
+      "icon": "pending",
+      "color": "#7B61FF",
+      "pendingTask": "3"
+    },
+    {
+      "id": "inProgress",
+      "name": "Progress",
+      "icon": "hourglass_empty",
+      "color": "#FFB800",
+      "pendingTask": "1"
+    },
+    {
+      "id": "completed",
+      "name": "Completed",
+      "icon": "task_alt",
+      "color": "#00C48C",
+      "pendingTask": "3"
+    }
+  ]
+} 

@@ -26,12 +26,13 @@ class CustomFonts {
         color: color ?? Appcolors.white,
       );
 
-  static TextStyle body({Color? color}) => TextStyle(
+  static TextStyle body({Color? color, TextDecoration? decoration}) => TextStyle(
         fontSize: medium,
         fontWeight: FontWeight.normal,
         letterSpacing: 0.15,
         fontFamily: 'Poppins',
         color: color,
+        decoration: decoration,
       );
 
   static TextStyle caption({Color? color}) => TextStyle(
